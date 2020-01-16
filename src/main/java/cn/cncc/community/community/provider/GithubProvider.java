@@ -1,7 +1,7 @@
-package cn.cncc.community.community.controller.provider;
+package cn.cncc.community.community.provider;
 
-import cn.cncc.community.community.controller.dto.AccessTokenDTO;
-import cn.cncc.community.community.controller.dto.GithubUser;
+import cn.cncc.community.community.dto.AccessTokenDTO;
+import cn.cncc.community.community.dto.GithubUser;
 import com.alibaba.fastjson.JSON;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class GithubProvider {
                     .build();
             try (Response response = client.newCall(request).execute()) {
                 String string = response.body().string();
-                String token = string.split("&")[0].split("=")[1];
+                String token = (string.split("&")[0]).split("=")[1];
                 return token;
             } catch (Exception e) {
                 e.printStackTrace();

@@ -1,4 +1,4 @@
-package cn.cncc.community.community.controller.dto;
+package cn.cncc.community.community.dto;
 
 public class GithubUser {
     private String name;
