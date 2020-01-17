@@ -12,8 +12,11 @@
 ## 工具
 [Git](https://git-scm.com/download)  
 [Visual Paradigm](https://www.visual-paradigm.com)  
+[Flyway](https://flywaydb.org/getstarted/firststeps/maven)  
 
 ## 其他
+执行Flyway脚本  
+mvn flyway:migrate
 
 ## 脚本
 ```sql
