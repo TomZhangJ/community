@@ -34,7 +34,6 @@ public class AuthorizeController {
   public String callback(
       @RequestParam(name = "code") String code,
       @RequestParam(name = "state") String state,
-      //                           HttpServletRequest request,
       HttpServletResponse response) {
     AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
     accessTokenDTO.setClient_id(clientId);
@@ -45,8 +44,8 @@ public class AuthorizeController {
     String accessToken = githubProvider.getAccessToken(accessTokenDTO);
     GithubUser githubUser = githubProvider.getUser(accessToken);
 
-    if (githubUser != null) {
-
+    if (githubUser != null && githubUser.getId() != null)
+    {
       User user = new User();
       String token = UUID.randomUUID().toString();
       user.setToken(token);
@@ -54,14 +53,12 @@ public class AuthorizeController {
       user.setAccountId(String.valueOf(githubUser.getId()));
       user.setGmtCreate(System.currentTimeMillis());
       user.setGmtModified(user.getGmtCreate());
+      user.setAvatarUrl(githubUser.getAvatar_url());
       userMapper.insert(user);
 
       // 登录成功，写cookie 和 session
       // 记录Cookie
       response.addCookie(new Cookie("token", token));
-
-      // 记录session
-      // request.getSession().setAttribute("user",githubUser);
     } else {
       // 登录失败，重新登录
     }

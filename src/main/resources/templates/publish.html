@@ -27,7 +27,9 @@
         <button type="submit" class="btn btn-default">搜索</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-
+        <li th:if="${session.user != null}">
+          <a href="/publish">发布</a>
+        </li>
         <li class="dropdown" th:if="${session.user != null}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -48,24 +50,31 @@
     <div class="col-lg-9 col-md-12 col-sm-12">
       <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
       <hr>
-      <form action="">
+      <form action="/publish" method="post">
         <div class="form-group">
           <label for="title">问题标题(简单扼要):</label>
-          <input type="text" class="form-control" id="title" name="title" placeholder="问题标题">
+          <input type="text" class="form-control" id="title" name="title" th:value="${title}" placeholder="问题标题">
         </div>
         <div class="form-group">
           <label for="title">问题补充(必填，请参照右侧提示):</label>
-          <textarea  class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
+          <textarea class="form-control" name="description" id="description" th:value="${description}" cols="30" rows="10"></textarea>
         </div>
         <div class="form-group">
           <label for="tag">添加标签:</label>
-          <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签，以','分隔">
+          <input type="text" class="form-control" id="tag" name="tag" th:value="${tag}" placeholder="输入标签，以','分隔">
         </div>
 
-        <button type="button" class="btn btn-success btn-publish">发布</button>
+        <div class="container-fluid main">
+          <div class="row">
+            <span class="alert alert-danger col-lg-9 col-md-12 col-sm-12" th:text="${error}" th:if="${error != null}"></span>
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <button type="submit" class="btn btn-success btn-publish">发布</button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
-    <div class="col-lg-3 col-md-12 col-sm-12">
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
       <h3>问题发起指南</h3>
       2010 年，Elasticsearch 首个版本发布，经过近 10 年的发展，Elastic Stack 系列开源项目的热度持续升温，Elastic 技术社区的用户量和开发者群体逐步壮大，也在不断进化。那么，这个群体是谁？他们在怎样使用 Elastic Stack ？他们又将如何进阶成长？
       为了洞察这个独特开发者群体的发展、技术应用现状，以及整个行业的发展趋势，Elastic 技术社区、阿里巴巴 Elasticsearch 技术团队和阿里云开发者社区联合首发《 Elasticsearch 中国开发者调查报告》。
