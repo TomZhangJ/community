@@ -24,7 +24,7 @@ public class ProfileController
                         Model model,
                         HttpServletRequest request,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size",defaultValue = "2") Integer size)
+                        @RequestParam(name = "size",defaultValue = "5") Integer size)
   {
     User user = (User) request.getSession().getAttribute("user");
     if(user == null)
@@ -43,7 +43,7 @@ public class ProfileController
       model.addAttribute("sectionName","最新回复");
     }
   
-    PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
+    PaginationDTO paginationDTO = questionService.list(user.getId().intValue(), page, size);
     model.addAttribute("pagination",paginationDTO);
     return "profile";
   }

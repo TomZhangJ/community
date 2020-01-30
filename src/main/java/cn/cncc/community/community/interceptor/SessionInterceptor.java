@@ -2,6 +2,8 @@ package cn.cncc.community.community.interceptor;
 
 import cn.cncc.community.community.mapper.UserMapper;
 import cn.cncc.community.community.model.User;
+import cn.cncc.community.community.model.UserExample;
+import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,6 @@ public class SessionInterceptor implements HandlerInterceptor
   
   @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
   {
-    User user = null;
     Cookie[] cookies = request.getCookies();
     if (cookies != null && cookies.length != 0)
     {
@@ -27,10 +28,12 @@ public class SessionInterceptor implements HandlerInterceptor
         if (cookie.getName().equals("token"))
         {
           String token = cookie.getValue();
-          user = userMapper.findByToken(token);
-          if (user != null)
+          UserExample userExample = new UserExample();
+          userExample.createCriteria().andTokenEqualTo(token);
+          List<User> users = userMapper.selectByExample(userExample);
+          if (users.size() != 0)
           {
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("user", users.get(0));
           }
           break;
         }

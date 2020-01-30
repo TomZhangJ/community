@@ -33,6 +33,11 @@ create table USER
     AVATAR_URL   VARCHAR(100)
 );
 ```
+```bash
+mvn flyway:migrate
+
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+```
 
 ## 答疑
 1、textarea 使用 th:value 不能回显
