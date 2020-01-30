@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("cn.cncc.community.community.mapper")
+@MapperScan(value = "cn.cncc.community.community.mapper")
 public class CommunityApplication {
 
     public static void main(String[] args) {

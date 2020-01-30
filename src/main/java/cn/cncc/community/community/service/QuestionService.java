@@ -2,6 +2,9 @@ package cn.cncc.community.community.service;
 
 import cn.cncc.community.community.dto.PaginationDTO;
 import cn.cncc.community.community.dto.QuestionDTO;
+import cn.cncc.community.community.exception.CustomizeErrorCode;
+import cn.cncc.community.community.exception.CustomizeException;
+import cn.cncc.community.community.mapper.QuestionExtMapper;
 import cn.cncc.community.community.mapper.QuestionMapper;
 import cn.cncc.community.community.mapper.UserMapper;
 import cn.cncc.community.community.model.Question;
@@ -16,8 +19,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionService {
-  @Autowired private UserMapper userMapper;
-  @Autowired private QuestionMapper questionMapper;
+  @Autowired(required = false)
+  private UserMapper userMapper;
+  
+  @Autowired(required = false)
+  private QuestionMapper questionMapper;
+  
+  @Autowired(required = false)
+  private QuestionExtMapper questionExtMapper;
 
   // 首页问题列表分页
   public PaginationDTO list(Integer page, Integer size)
@@ -124,6 +133,10 @@ public class QuestionService {
   public QuestionDTO getById(Integer id)
   {
     Question question = questionMapper.selectByPrimaryKey(id);
+    if(question == null)
+    {
+      throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+    }
     QuestionDTO questionDTO = new QuestionDTO();
     BeanUtils.copyProperties(question,questionDTO);
     User user = userMapper.selectByPrimaryKey(question.getCreator().longValue());
@@ -148,7 +161,19 @@ public class QuestionService {
       updateQuestion.setTag(question.getTag());
       QuestionExample questionExample = new QuestionExample();
       questionExample.createCriteria().andIdEqualTo(question.getId());
-      questionMapper.updateByExampleSelective(updateQuestion, questionExample);
+      int updated = questionMapper.updateByExampleSelective(updateQuestion, questionExample);
+      if(updated != 1)
+      {
+        throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+      }
     }
+  }
+  
+  public void incView(Integer id)
+  {
+    Question question = new Question();
+    question.setId(id);
+    question.setViewCount(1);
+    questionExtMapper.incView(question);
   }
 }
