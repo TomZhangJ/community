@@ -5,7 +5,7 @@
 [Sprint Web](https://spring.io/guides/gs/serving-web-content/)  
 [ES 社区](https://elasticsearch.cn/explore)  
 [BootStrap 文档](https://v3.bootcss.com/components/)  
-[Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
+[Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)  
 [Spring 内置数据库](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-embedded-database-support)  
 [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)
 

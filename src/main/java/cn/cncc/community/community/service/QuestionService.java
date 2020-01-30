@@ -19,6 +19,7 @@ public class QuestionService {
   @Autowired private UserMapper userMapper;
   @Autowired private QuestionMapper questionMapper;
 
+  // 首页问题列表分页
   public PaginationDTO list(Integer page, Integer size)
   {
     PaginationDTO paginationDTO = new PaginationDTO();
@@ -67,6 +68,7 @@ public class QuestionService {
     return paginationDTO;
   }
   
+  // 用户问题列表分页
   public PaginationDTO list(Integer userId, Integer page, Integer size)
   {
     PaginationDTO paginationDTO = new PaginationDTO();
