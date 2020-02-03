@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProfileController
 {
-  @Autowired private UserMapper userMapper;
+  @Autowired(required = false)
+  private UserMapper userMapper;
   
   @Autowired private QuestionService questionService;
   
@@ -43,7 +44,7 @@ public class ProfileController
       model.addAttribute("sectionName","最新回复");
     }
   
-    PaginationDTO paginationDTO = questionService.list(user.getId().intValue(), page, size);
+    PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
     model.addAttribute("pagination",paginationDTO);
     return "profile";
   }

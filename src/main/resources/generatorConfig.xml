@@ -31,6 +31,7 @@
 
     <table tableName="USER" domainObjectName="User" ></table>
     <table tableName="QUESTION" domainObjectName="Question" ></table>
+    <table tableName="TCOMMENT" domainObjectName="Tcomment" ></table>
 
   </context>
 </generatorConfiguration>

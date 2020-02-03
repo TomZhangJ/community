@@ -13,4 +13,6 @@ public interface QuestionExtMapper
      * @mbg.generated Tue Jan 21 16:48:15 CST 2020
      */
     int incView(Question record);
+    
+    int incCommentCount(Question record);
 }
