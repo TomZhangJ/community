@@ -3,7 +3,7 @@ package cn.cncc.community.community.dto;
 import lombok.Data;
 
 @Data
-public class TcommentDTO
+public class CommentDTO
 {
   private Long parentId;
   private String content;

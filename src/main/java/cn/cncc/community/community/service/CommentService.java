@@ -5,13 +5,12 @@ import cn.cncc.community.community.exception.CustomizeErrorCode;
 import cn.cncc.community.community.exception.CustomizeException;
 import cn.cncc.community.community.mapper.QuestionExtMapper;
 import cn.cncc.community.community.mapper.QuestionMapper;
-import cn.cncc.community.community.mapper.TcommentMapper;
 import cn.cncc.community.community.model.Question;
 import cn.cncc.community.community.model.Tcomment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-public class TcommentService
+public class CommentService
 {
   @Autowired
   private TcommentMapper tcommentMapper;
