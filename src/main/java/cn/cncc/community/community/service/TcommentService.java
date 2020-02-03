@@ -9,6 +9,7 @@ import cn.cncc.community.community.mapper.TcommentMapper;
 import cn.cncc.community.community.model.Question;
 import cn.cncc.community.community.model.Tcomment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public class TcommentService
 {
@@ -21,6 +22,7 @@ public class TcommentService
   @Autowired
   private QuestionExtMapper questionExtMapper;
   
+  @Transactional
   public void insert(Tcomment tcomment)
   {
     if (tcomment.getParentId() == null || tcomment.getParentId() == 0)
@@ -53,7 +55,7 @@ public class TcommentService
         throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
       }
   
-      tcommentMapper.insert(tcomment);
+      tcommentMapper.insert(tcomment);        // 需要事务处理
       question.setCommentCount(1);
       questionExtMapper.incCommentCount(question);
     }
