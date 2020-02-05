@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CustomizeExceptionHandler
 {
   @ExceptionHandler(Exception.class)
-  Object handle(Throwable e, Model model, HttpServletRequest request, HttpServletResponse response)
+  ModelAndView handle(Throwable e, Model model, HttpServletRequest request, HttpServletResponse response)
   {
     String contentType = request.getContentType();
     if ("application/json".equals(contentType))

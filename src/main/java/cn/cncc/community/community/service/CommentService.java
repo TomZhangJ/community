@@ -1,60 +1,63 @@
 package cn.cncc.community.community.service;
 
-import cn.cncc.community.community.enums.TcommentTypeEnum;
+import cn.cncc.community.community.enums.CommentTypeEnum;
 import cn.cncc.community.community.exception.CustomizeErrorCode;
 import cn.cncc.community.community.exception.CustomizeException;
+import cn.cncc.community.community.mapper.CommentMapper;
 import cn.cncc.community.community.mapper.QuestionExtMapper;
 import cn.cncc.community.community.mapper.QuestionMapper;
 import cn.cncc.community.community.model.Question;
-import cn.cncc.community.community.model.Tcomment;
+import cn.cncc.community.community.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class CommentService
 {
-  @Autowired
-  private TcommentMapper tcommentMapper;
+  @Autowired(required = false)
+  private CommentMapper commentMapper;
   
-  @Autowired
+  @Autowired(required = false)
   private QuestionMapper questionMapper;
   
   @Autowired
   private QuestionExtMapper questionExtMapper;
   
   @Transactional
-  public void insert(Tcomment tcomment)
+  public void insert(Comment comment)
   {
-    if (tcomment.getParentId() == null || tcomment.getParentId() == 0)
+    if (comment.getParentId() == null || comment.getParentId() == 0)
     {
       throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
     }
     
-    if (tcomment.getType() == null || TcommentTypeEnum.isExist(tcomment.getType()))
+    if (comment.getType() == null || !CommentTypeEnum.isExist(comment.getType()))
     {
       throw new CustomizeException(CustomizeErrorCode.TYPE_PARAM_WRONG);
     }
   
-    if (tcomment.getType() == TcommentTypeEnum.COMMENT.getType())
+    if (comment.getType() == CommentTypeEnum.COMMENT.getType())
     {
       // 回复评论
-      Tcomment dbTcomment = tcommentMapper.selectByPrimaryKey(tcomment.getParentId());
-      if (dbTcomment == null)
+      Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
+      if (dbComment == null)
       {
         throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
       }
   
-      tcommentMapper.insert(tcomment);
+      commentMapper.insert(comment);
     }
     else
     {
       // 回复问题
-      Question question = questionMapper.selectByPrimaryKey(tcomment.getParentId());
+      Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
       if(question == null)
       {
         throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
       }
   
-      tcommentMapper.insert(tcomment);        // 需要事务处理
+      commentMapper.insert(comment);        // 需要事务处理
       question.setCommentCount(1);
       questionExtMapper.incCommentCount(question);
     }

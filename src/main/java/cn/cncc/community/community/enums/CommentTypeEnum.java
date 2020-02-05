@@ -1,6 +1,6 @@
 package cn.cncc.community.community.enums;
 
-public enum TcommentTypeEnum
+public enum CommentTypeEnum
 {
   QUESTION(1),
   COMMENT(2);
@@ -8,9 +8,9 @@ public enum TcommentTypeEnum
   
   public static boolean isExist(Integer type)
   {
-    for (TcommentTypeEnum tcommentTypeEnum : TcommentTypeEnum.values())
+    for (CommentTypeEnum commentTypeEnum : CommentTypeEnum.values())
     {
-      if (tcommentTypeEnum.getType() == type)
+      if (commentTypeEnum.getType() == type)
       {
         return true;
       }
@@ -23,7 +23,7 @@ public enum TcommentTypeEnum
     return type;
   }
 
-  TcommentTypeEnum(Integer type)
+  CommentTypeEnum(Integer type)
   {
     this.type = type;
   }
