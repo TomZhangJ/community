@@ -2,6 +2,7 @@ package cn.cncc.community.community.controller;
 
 import cn.cncc.community.community.dto.CommentDTO;
 import cn.cncc.community.community.dto.QuestionDTO;
+import cn.cncc.community.community.enums.CommentTypeEnum;
 import cn.cncc.community.community.service.CommentService;
 import cn.cncc.community.community.service.QuestionService;
 import java.util.List;
@@ -26,7 +27,7 @@ public class QuestionController
   {
     QuestionDTO questionDTO = questionService.getById(id);
   
-    List<CommentDTO> comments = commentService.listByQuestionId(id);
+    List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
     
     // 累加阅读数
     questionService.incView(id);

@@ -4,6 +4,7 @@ import cn.cncc.community.community.dto.CommentDTO;
 import cn.cncc.community.community.enums.CommentTypeEnum;
 import cn.cncc.community.community.exception.CustomizeErrorCode;
 import cn.cncc.community.community.exception.CustomizeException;
+import cn.cncc.community.community.mapper.CommentExtMapper;
 import cn.cncc.community.community.mapper.CommentMapper;
 import cn.cncc.community.community.mapper.QuestionExtMapper;
 import cn.cncc.community.community.mapper.QuestionMapper;
@@ -38,6 +39,9 @@ public class CommentService
   @Autowired(required = false)
   private UserMapper userMapper;
   
+  @Autowired(required = false)
+  private CommentExtMapper commentExtMapper;
+  
   @Transactional
   public void insert(Comment comment)
   {
@@ -61,6 +65,12 @@ public class CommentService
       }
   
       commentMapper.insert(comment);
+      
+      // 增加评论数
+      Comment parentComment = new Comment();
+      parentComment.setId(comment.getParentId());
+      parentComment.setCommentCount(1);
+      commentExtMapper.incCommentCount(parentComment);
     }
     else
     {
@@ -77,10 +87,10 @@ public class CommentService
     }
   }
   
-  public List<CommentDTO> listByQuestionId(Long id)
+  public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum type)
   {
     CommentExample commentExample = new CommentExample();
-    commentExample.createCriteria().andParentIdEqualTo(id).andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+    commentExample.createCriteria().andParentIdEqualTo(id).andTypeEqualTo(type.getType());
     commentExample.setOrderByClause("gmt_create desc");
     List<Comment> comments = commentMapper.selectByExample(commentExample);
     

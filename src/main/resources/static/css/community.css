@@ -59,10 +59,31 @@ body{
   font-size: 15px;
   cursor: pointer;
 }
+.menu .comment-icon{
+  font-size: 15px;
+  cursor: pointer;
+}
+.menu .comment-icon:hover{
+  color: #499ef3;
+}
+.menu .active{
+  color: #499ef3;
+}
 .menu .icon:hover{
-  color: #2b669a;
+  color: #499ef3;
 }
 .margintop
 {
   margin-top: 15px;
+}
+.sub-comments
+{
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 1px solid #eee;
+  padding-top: 15px;
+  margin-bottom: 15px;
+}
+.sub-comments .btn{
+  margin: 10px 0;
 }

@@ -22,5 +22,7 @@ public class CommentDTO
   
   private String content;
   
+  private Integer commentCount;
+  
   private User user;
 }
