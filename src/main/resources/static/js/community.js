@@ -62,9 +62,7 @@ function collapseComments(e) {
     comments.removeClass("in");
     e.removeAttribute("data-collapse");
     e.classList.remove("active");
-  }
-  else
-  {
+  } else {
 
     $.getJSON("/comment/" + id, function (data) {
       var subCommentContainer = $("#comment-" + id);
@@ -107,5 +105,16 @@ function collapseComments(e) {
       e.setAttribute("data-collapse", "in");
       e.classList.add("active");
     });
+  }
+}
+
+function selectTag(value) {
+  var previous = $("#tag").val();
+  if (previous.indexOf(value) == -1) {
+    if (previous) {
+      $("#tag").val(previous + ',' + value);
+    } else {
+      $("#tag").val(value);
+    }
   }
 }

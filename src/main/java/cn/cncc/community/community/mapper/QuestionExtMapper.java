@@ -1,6 +1,7 @@
 package cn.cncc.community.community.mapper;
 
 import cn.cncc.community.community.model.Question;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component(value ="questionExtMapper")
@@ -15,4 +16,6 @@ public interface QuestionExtMapper
     int incView(Question record);
     
     int incCommentCount(Question record);
+    
+    List<Question> selectRelated(Question question);
 }
