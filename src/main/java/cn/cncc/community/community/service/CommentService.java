@@ -63,7 +63,7 @@ public class CommentService {
       }
   
       // 回复问题
-      Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
+      Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
       if (question == null) {
         throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
       }
