@@ -7,7 +7,8 @@
 [BootStrap 文档](https://v3.bootcss.com/components/)  
 [Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)  
 [Spring 内置数据库](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-embedded-database-support)  
-[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)
+[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)   
+[Markdown 插件](http://editor.md.ipandao.com/)
 
 ## 工具
 [Git](https://git-scm.com/download)  

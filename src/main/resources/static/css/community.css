@@ -31,7 +31,6 @@ body{
   margin-right: 5px;
 }
 .community-menu{
-  display: block;
   margin-bottom: 15px;
   font-size: 13px;
   color: #999999;
@@ -50,7 +49,9 @@ body{
 }
 
 .publish-tag-tab .label-info{
-  margin-right: 10px;
+  display: inline-block;
+  white-space: normal;
+  margin: 5px 5px;
 }
 .jumbotron{
   margin:50px;
