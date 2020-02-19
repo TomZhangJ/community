@@ -95,9 +95,12 @@ public class CommentService {
   }
   
   private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
-    if (receiver == comment.getCommentator()){
-      return;
-    }
+    /**
+     * 自己不能给自己的问题回复或评论
+     */
+//    if (receiver == comment.getCommentator()){
+//      return;
+//    }
     
     Notification notification = new Notification();
     notification.setGmtCreate(System.currentTimeMillis());

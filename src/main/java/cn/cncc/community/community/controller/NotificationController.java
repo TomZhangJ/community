@@ -7,7 +7,6 @@ import cn.cncc.community.community.service.NotificationService;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,7 +18,6 @@ public class NotificationController {
   
   @GetMapping("/notification/{id}")
   public String profile(@PathVariable(name = "id") Long id,
-      Model model,
       HttpServletRequest request){
     User user = (User) request.getSession().getAttribute("user");
     if (user == null) {
