@@ -71,10 +71,10 @@ mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 ```
 
 ## 答疑
-1、textarea 使用 th:value 不能回显
-2、fastjson 可以自动把下划线标示映射到驼峰的属性
-3、h2数据库到底是什么和链接异常的处理
-4、错误提示没有的时候发布按钮飘动到了左边
-5、列表中日期格式化问题
-6、idea 默认没有安装 lombok 插件
-7、提效 chrome 插件介绍
+1、textarea 使用 th:value 不能回显  
+2、fastjson 可以自动把下划线标示映射到驼峰的属性  
+3、h2数据库到底是什么和链接异常的处理  
+4、错误提示没有的时候发布按钮飘动到了左边  
+5、列表中日期格式化问题  
+6、idea 默认没有安装 lombok 插件  
+7、提效 chrome 插件介绍  
